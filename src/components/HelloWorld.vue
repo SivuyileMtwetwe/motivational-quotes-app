@@ -1,57 +1,211 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="motivational-app">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+    <div class="quote-section">
+      <blockquote>
+        "{{ currentQuote }}"
+      </blockquote>
+      <p>- {{ currentAuthor }}</p>
+      <button id="btn" @click="generateQuote">Get Inspired ✨</button>
+    </div>
+    <footer>
+      <p>Powered by Vue.js | <a href="https://vuejs.org" target="_blank" rel="noopener">Learn More</a></p>
+    </footer>
   </div>
 </template>
 
+
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+  name: "MotivationalApp",
+  data() {
+    return {
+      title: "Motivational Quotes App",
+      description: "Click the button below to discover a new motivational quote and boost your day!",
+      quotes: [
+        { text: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+        { text: "Your time is limited, don’t waste it living someone else’s life.", author: "Steve Jobs" },
+        { text: "Whether you think you can or you think you can’t, you’re right.", author: "Henry Ford" },
+        { text: "Success is not how high you have climbed, but how you make a positive difference.", author: "Roy T. Bennett" },
+        { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+        {
+          text: "Learn the rules like a pro, so you can break them like an artist." , author: "Pablo Picasso"
+        },{
+          text: "How about you own the room", author: "Coach Matika"
+        }
+      ],
+      currentQuote: "",
+      currentAuthor: "",
+    };
+  },
+  methods: {
+    generateQuote() {
+      const randomIndex = Math.floor(Math.random() * this.quotes.length);
+      this.currentQuote = this.quotes[randomIndex].text;
+      this.currentAuthor = this.quotes[randomIndex].author;
+    },
+  },
+  mounted() {
+    this.generateQuote();
+  },
+};
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.motivational-app {
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-image: url("/src/assets/hBWQuv7KSnKo7n00Hzvm3w.webp");
+  background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment:fixed;
+  /* background: linear-gradient(to bottom, #f9d423, #ff4e50); */
+  min-height: 100dvh;
+  color: #fff;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+p {
+  font-size: 1.2rem;
+  margin: 10px 0;
 }
-a {
-  color: #42b983;
+
+.quote-section {
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  max-width: 600px;
 }
+blockquote {
+  font-style: italic;
+  font-size: 1.5rem;
+  margin: 0 0 10px;
+}
+button {
+  background-color: #ff6f61;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+button:hover {
+  background-color: #e65a50;
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 0.9rem;
+}
+footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.quote-section {
+	-webkit-animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+	        animation: slide-in-blurred-top 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+
+ @-webkit-keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+#btn {
+	-webkit-animation: pulsate-fwd 0.5s ease-in-out infinite both;
+	        animation: pulsate-fwd 0.5s ease-in-out infinite both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2024-12-3 12:27:34
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation pulsate-fwd
+ * ----------------------------------------
+ */
+ @-webkit-keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+
 </style>
+
